@@ -1,3 +1,7 @@
+# TALLER NRO 2
+# GRUPO 33
+# Sergio Miguel Yáñez
+#
 # PROGRAMA DE REGISTRO DE GASTOS DIARIOS
 #
 # La finalidad del programa es de tener un registro de los gastos del usuario, pidiendo que
@@ -268,3 +272,17 @@ while True:
     #Opción incorrecta
     else:
         print("Opción inválida, por favor seleccione 1, 2 o 3.")
+
+
+# ##### SUGERENCIAS #####
+#
+# -El programa se podría hacer más prolijo y robusto con bloques de manejo de errores en vez de
+# condicionales anidados y métodos como replace() o isdigit().
+# -Conectarlo con una base de datos nos daría más posibilidades a la hora de guardar y consultar
+# datos.
+# -La creación y utilización de funciones facilitaría la legibilidad y la reutilización del código,
+# como por ejemplo con las validaciones.
+# -Se podría implementar el uso de una consola gráfica para mayor facilidad a la hora de correr el
+# programa, y para usuarios sin experiencia.
+# -El uso de librerías nos podría dar mayor facilidad en la escritura del código, ya que contienen
+# una enorme variedad de funciones que podríamos aplicar en este trabajo.
