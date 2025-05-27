@@ -87,25 +87,40 @@ while True:
             categoria_input = input("A qué categoría pertenece este gasto? ").strip()
             descripcion_input = input("Describa en qué se gastó: ").strip()
             print("Excelente! Ahora anotemos la fecha en la que se realizó el gasto")
-            #Comprobación de ingreso de día
-            dia = input("Día (ej.: 07): ").strip()
-            while not (dia.isdigit() and 1 <= int(dia) <= 31) :
-                print("Día inválido")
-                dia = input("Ingrese el día nuevamente: ").strip()
-            #Comprobación de ingreso de mes
-            mes = input("Mes (ej.: 03): ").strip()
-            while not (mes.isdigit() and 1 <= int(mes) <= 12) :
-                print("Mes inválido")
-                mes = input("Ingrese el mes nuevamente: ").strip()
-            #Comprobación de año
+            # Comprobación de año
             anio = input("Año (ej.: 2021): ").strip()
-            while not (anio.isdigit() and 1900 < int(anio) <= 2025) :
+            while not (anio.isdigit() and 1900 < int(anio) <= 2025):
                 print("Año inválido")
                 anio = input("Ingrese el año nuevamente: ").strip()
-
+            anio = int(anio)#Conversión de str a int
+            # Comprobación de ingreso de mes
+            mes = input("Mes (ej.: 03): ").strip()
+            while not (mes.isdigit() and 1 <= int(mes) <= 12):
+                print("Mes inválido")
+                mes = input("Ingrese el mes nuevamente: ").strip()
+            #Comprobación de ingreso de día
+            bisiesto = (anio % 4 == 0 and (anio % 100 != 0 or anio % 400 == 0))#Booleano calculando año bisiesto
+            while True :
+                    dia = input("Día (ej.: 07): ").strip()
+                    if not (dia.isdigit() and 1 <= int(dia) <= 31) :
+                        print("Día inválido")
+                        continue
+                    dia_int = int(dia)
+                    mes_int = int(mes)
+                    if mes_int in [4, 6, 9, 11] and dia_int > 30:
+                            print("Este mes solo tiene 30 días.")
+                    elif mes_int == 2:
+                        if bisiesto and dia_int > 29:
+                                print("Febrero en este año bisiesto tiene 29 días.")
+                        elif not bisiesto and dia_int > 28:
+                                print("Febrero en este año tiene 28 días.")
+                        else:
+                            break  # Día válido para febrero
+                    else:
+                        break  # Día válido para otros meses
             gasto = {"Monto" : float(monto_input), "Categoría" : categoria_input,
                      "Descripción" : descripcion_input, "Día" : dia, "Mes" : mes, "Año" : anio}
-            correccion = input(f"El gasto ingresado es: ${gasto["Monto"]}, {gasto["Categoría"]}, "
+            correccion = input(f"El gasto ingresado es: {gasto["Monto"]}, {gasto["Categoría"]}, "
                                f"{gasto["Descripción"]}, {gasto["Día"]}/{gasto["Mes"]}/{gasto["Año"]}.\n"
                                 f"Esto es correcto? (S/N): ").strip()
             if correccion.lower() == "s" :
@@ -158,7 +173,7 @@ while True:
                             if (gasto["Día"] == dia and
                                 gasto["Mes"] == mes and
                                 gasto["Año"] == anio):
-                                print(f"${gasto}\n")
+                                print(f"{gasto}\n")
                                 encontrado = True
                             elif not encontrado:
                                 print("No se encontraron gastos para esa fecha.")
@@ -180,7 +195,7 @@ while True:
                         encontrado = False
                         for gasto in gastos_lista:
                             if gasto["Mes"] == mes :
-                                print(f"${gasto}")
+                                print(f"{gasto}")
                                 encontrado = True
                             elif not encontrado:
                                 print("No se encontraron gastos en ese mes.")
@@ -202,7 +217,7 @@ while True:
                         encontrado = False
                         for gasto in gastos_lista:
                             if gasto["Año"] == anio:
-                                print(f"${gasto}")
+                                print(f"{gasto}")
                                 encontrado = True
                             elif not encontrado:
                                 print("No se encontraron gastos es ese año.")
@@ -220,7 +235,7 @@ while True:
                         encontrado = False
                         for gasto in gastos_lista:
                             if gasto["Categoría"] == categoria :
-                                print(f"${gasto}")
+                                print(f"{gasto}")
                                 encontrado = True
                             elif not encontrado:
                                 print("No se encontraron gastos para esa categoría.")
